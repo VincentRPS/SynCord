@@ -38,7 +38,7 @@ setup(
     install_requires=requirements,
     extras_require=extras_require,
     test_suite="tests",
-    setup_requires=["pytest-runner==2.11.1"],
+    setup_requires=["pytest-runner==5.3.1"],
     tests_require=[
         "pytest==3.2.1",
         "pytest-benchmark==3.1.1",
