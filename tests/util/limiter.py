@@ -1,6 +1,7 @@
 import time
-import gevent
 from unittest import TestCase
+
+import gevent
 
 from syncord.util.limiter import SimpleLimiter
 

@@ -3,7 +3,7 @@ def get_enum_members(enum):
         if not isinstance(k, str):
             continue
 
-        if k.startswith('_') or not k.isupper():
+        if k.startswith("_") or not k.isupper():
             continue
 
         yield k, v

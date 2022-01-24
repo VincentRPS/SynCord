@@ -1,6 +1,6 @@
 import pytest
 
-from syncord.types.base import Model, Field, cached_property, text
+from syncord.types.base import Field, Model, cached_property, text
 
 
 @pytest.fixture
@@ -45,8 +45,8 @@ def test_text_casting():
     class TestModel(Model):
         a = Field(text)
 
-    model = TestModel({'a': 1})
-    assert model.a == '1'
+    model = TestModel({"a": 1})
+    assert model.a == "1"
 
-    model = TestModel({'a': {}})
-    assert model.a == '{}'
+    model = TestModel({"a": {}})
+    assert model.a == "{}"

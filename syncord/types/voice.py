@@ -1,4 +1,5 @@
-from syncord.types.base import SlottedModel, text, Field, snowflake, cached_property
+from syncord.types.base import (Field, SlottedModel, cached_property,
+                                snowflake, text)
 
 
 class VoiceState(SlottedModel):
@@ -37,4 +38,4 @@ class VoiceRegion(SlottedModel):
         return self.id
 
     def __repr__(self):
-        return u'<VoiceRegion {}>'.format(self.name)
+        return u"<VoiceRegion {}>".format(self.name)

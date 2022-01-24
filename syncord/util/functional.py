@@ -31,7 +31,7 @@ def chunks(obj, size):
         Size of chunks to split list into.
     """
     for i in range(0, len(obj), size):
-        yield obj[i:i + size]
+        yield obj[i : i + size]
 
 
 def one_or_many(f):
@@ -39,15 +39,17 @@ def one_or_many(f):
     Wraps a function so that it will either take a single argument, or a variable
     number of args.
     """
+
     def _f(*args):
         if len(args) == 1:
             return f(args[0])
         return f(*args)
+
     return _f
 
 
 def simple_cached_property(method):
-    key = '_{}'.format(method.__name__)
+    key = "_{}".format(method.__name__)
 
     def _getattr(inst):
         try:

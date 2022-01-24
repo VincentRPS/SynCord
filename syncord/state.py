@@ -1,16 +1,16 @@
 import weakref
-
 from collections import deque, namedtuple
+
 from gevent.event import Event
 
 from syncord.types.base import UNSET
 from syncord.util.config import Config
-from syncord.util.string import underscore
-from syncord.util.hashmap import HashMap, DefaultHashMap
 from syncord.util.emitter import Priority
+from syncord.util.hashmap import DefaultHashMap, HashMap
+from syncord.util.string import underscore
 
 
-class StackMessage(namedtuple('StackMessage', ['id', 'channel_id', 'author_id'])):
+class StackMessage(namedtuple("StackMessage", ["id", "channel_id", "author_id"])):
     """
     A message stored on a stack inside of the state object, used for tracking
     previously sent messages in channels.
@@ -53,6 +53,7 @@ class StateConfig(Config):
         to batch requests using the underlying `GatewayClient.request_guild_members`
         interface.
     """
+
     track_messages = True
     track_messages_size = 100
 
@@ -90,11 +91,28 @@ class State(object):
     messages : Optional[dict(snowflake, deque)]
         Mapping of channel ids to deques containing `StackMessage` objects.
     """
+
     EVENTS = [
-        'Ready', 'GuildCreate', 'GuildUpdate', 'GuildDelete', 'GuildMemberAdd', 'GuildMemberRemove',
-        'GuildMemberUpdate', 'GuildMembersChunk', 'GuildRoleCreate', 'GuildRoleUpdate', 'GuildRoleDelete',
-        'GuildEmojisUpdate', 'ChannelCreate', 'ChannelUpdate', 'ChannelDelete', 'VoiceServerUpdate', 'VoiceStateUpdate',
-        'MessageCreate', 'PresenceUpdate', 'UserUpdate',
+        "Ready",
+        "GuildCreate",
+        "GuildUpdate",
+        "GuildDelete",
+        "GuildMemberAdd",
+        "GuildMemberRemove",
+        "GuildMemberUpdate",
+        "GuildMembersChunk",
+        "GuildRoleCreate",
+        "GuildRoleUpdate",
+        "GuildRoleDelete",
+        "GuildEmojisUpdate",
+        "ChannelCreate",
+        "ChannelUpdate",
+        "ChannelDelete",
+        "VoiceServerUpdate",
+        "VoiceStateUpdate",
+        "MessageCreate",
+        "PresenceUpdate",
+        "UserUpdate",
     ]
 
     def __init__(self, client, config):
@@ -114,8 +132,10 @@ class State(object):
 
         # If message tracking is enabled, listen to those events
         if self.config.track_messages:
-            self.messages = DefaultHashMap(lambda: deque(maxlen=self.config.track_messages_size))
-            self.EVENTS += ['MessageDelete', 'MessageDeleteBulk']
+            self.messages = DefaultHashMap(
+                lambda: deque(maxlen=self.config.track_messages_size)
+            )
+            self.EVENTS += ["MessageDelete", "MessageDeleteBulk"]
 
         # The bound listener objects
         self.listeners = []
@@ -133,16 +153,21 @@ class State(object):
         Binds all events for this state object, storing the listeners for later
         unbinding.
         """
-        assert not len(self.listeners), 'Binding while already bound is dangerous'
+        assert not len(self.listeners), "Binding while already bound is dangerous"
 
         for event in self.EVENTS:
-            func = 'on_' + underscore(event)
-            self.listeners.append(self.client.events.on(event, getattr(self, func), priority=Priority.AFTER))
+            func = "on_" + underscore(event)
+            self.listeners.append(
+                self.client.events.on(
+                    event, getattr(self, func), priority=Priority.AFTER
+                )
+            )
 
     def fill_messages(self, channel):
         for message in reversed(next(channel.messages_iter(bulk=True))):
             self.messages[channel.id].append(
-                StackMessage(message.id, message.channel_id, message.author.id))
+                StackMessage(message.id, message.channel_id, message.author.id)
+            )
 
     def on_ready(self, event):
         self.me = event.user
@@ -158,7 +183,10 @@ class State(object):
     def on_message_create(self, event):
         if self.config.track_messages:
             self.messages[event.message.channel_id].append(
-                StackMessage(event.message.id, event.message.channel_id, event.message.author.id))
+                StackMessage(
+                    event.message.id, event.message.channel_id, event.message.author.id
+                )
+            )
 
         if event.message.channel_id in self.channels:
             self.channels[event.message.channel_id].last_message_id = event.message.id
@@ -167,7 +195,9 @@ class State(object):
         if event.channel_id not in self.messages:
             return
 
-        sm = next((i for i in self.messages[event.channel_id] if i.id == event.id), None)
+        sm = next(
+            (i for i in self.messages[event.channel_id] if i.id == event.id), None
+        )
         if not sm:
             return
 
@@ -206,12 +236,15 @@ class State(object):
             event.guild.request_guild_members()
 
     def on_guild_update(self, event):
-        self.guilds[event.guild.id].inplace_update(event.guild, ignored=[
-            'channels',
-            'members',
-            'voice_states',
-            'presences',
-        ])
+        self.guilds[event.guild.id].inplace_update(
+            event.guild,
+            ignored=[
+                "channels",
+                "members",
+                "voice_states",
+                "presences",
+            ],
+        )
 
     def on_guild_delete(self, event):
         if event.id in self.guilds:
@@ -223,7 +256,9 @@ class State(object):
 
     def on_channel_create(self, event):
         if event.channel.is_guild and event.channel.guild_id in self.guilds:
-            self.guilds[event.channel.guild_id].channels[event.channel.id] = event.channel
+            self.guilds[event.channel.guild_id].channels[
+                event.channel.id
+            ] = event.channel
             self.channels[event.channel.id] = event.channel
         elif event.channel.is_dm:
             self.dms[event.channel.id] = event.channel
@@ -243,7 +278,11 @@ class State(object):
                 self.channels[event.channel.id].after_load()
 
     def on_channel_delete(self, event):
-        if event.channel.is_guild and event.channel.guild and event.channel.id in event.channel.guild.channels:
+        if (
+            event.channel.is_guild
+            and event.channel.guild
+            and event.channel.id in event.channel.guild.channels
+        ):
             del event.channel.guild.channels[event.channel.id]
         elif event.channel.is_dm and event.channel.id in self.dms:
             del self.dms[event.channel.id]
@@ -265,16 +304,27 @@ class State(object):
             # Disconnection
             else:
                 if event.state.guild_id in self.guilds:
-                    if event.state.session_id in self.guilds[event.state.guild_id].voice_states:
-                        del self.guilds[event.state.guild_id].voice_states[event.state.session_id]
+                    if (
+                        event.state.session_id
+                        in self.guilds[event.state.guild_id].voice_states
+                    ):
+                        del self.guilds[event.state.guild_id].voice_states[
+                            event.state.session_id
+                        ]
                 del self.voice_states[event.state.session_id]
         # New connection
         elif event.state.channel_id:
             if event.state.guild_id in self.guilds:
-                expired_voice_state = self.guilds[event.state.guild_id].voice_states.select_one(user_id=event.user_id)
+                expired_voice_state = self.guilds[
+                    event.state.guild_id
+                ].voice_states.select_one(user_id=event.user_id)
                 if expired_voice_state:
-                    del self.guilds[event.state.guild_id].voice_states[expired_voice_state.session_id]
-                self.guilds[event.state.guild_id].voice_states[event.state.session_id] = event.state
+                    del self.guilds[event.state.guild_id].voice_states[
+                        expired_voice_state.session_id
+                    ]
+                self.guilds[event.state.guild_id].voice_states[
+                    event.state.session_id
+                ] = event.state
             expired_voice_state = self.voice_states.select_one(user_id=event.user_id)
             if expired_voice_state:
                 del self.voice_states[expired_voice_state.session_id]
@@ -302,7 +352,9 @@ class State(object):
         if event.member.id not in self.guilds[event.member.guild_id].members:
             return
 
-        self.guilds[event.member.guild_id].members[event.member.id].inplace_update(event.member)
+        self.guilds[event.member.guild_id].members[event.member.id].inplace_update(
+            event.member
+        )
 
     def on_guild_member_remove(self, event):
         if event.guild_id not in self.guilds:

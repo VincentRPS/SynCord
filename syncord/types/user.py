@@ -1,9 +1,8 @@
 from datetime import datetime
 
-from syncord.types.base import (
-    SlottedModel, Field, snowflake, text, with_equality, with_hash, enum, ListField,
-    cached_property,
-)
+from syncord.types.base import (Field, ListField, SlottedModel,
+                                cached_property, enum, snowflake, text,
+                                with_equality, with_hash)
 
 
 class DefaultAvatars(object):
@@ -16,7 +15,7 @@ class DefaultAvatars(object):
     ALL = [BLURPLE, GREY, GREEN, ORANGE, RED]
 
 
-class User(SlottedModel, with_equality('id'), with_hash('id')):
+class User(SlottedModel, with_equality("id"), with_hash("id")):
     id = Field(snowflake)
     username = Field(text)
     avatar = Field(text)
@@ -27,16 +26,18 @@ class User(SlottedModel, with_equality('id'), with_hash('id')):
 
     presence = Field(None)
 
-    def get_avatar_url(self, still_format='webp', animated_format='gif', size=1024):
+    def get_avatar_url(self, still_format="webp", animated_format="gif", size=1024):
         if not self.avatar:
-            return 'https://cdn.discordapp.com/embed/avatars/{}.png'.format(self.default_avatar)
+            return "https://cdn.discordapp.com/embed/avatars/{}.png".format(
+                self.default_avatar
+            )
 
-        if self.avatar.startswith('a_'):
-            return 'https://cdn.discordapp.com/avatars/{}/{}.{}?size={}'.format(
+        if self.avatar.startswith("a_"):
+            return "https://cdn.discordapp.com/avatars/{}/{}.{}?size={}".format(
                 self.id, self.avatar, animated_format, size
             )
         else:
-            return 'https://cdn.discordapp.com/avatars/{}/{}.{}?size={}'.format(
+            return "https://cdn.discordapp.com/avatars/{}/{}.{}?size={}".format(
                 self.id, self.avatar, still_format, size
             )
 
@@ -50,20 +51,20 @@ class User(SlottedModel, with_equality('id'), with_hash('id')):
 
     @property
     def mention(self):
-        return '<@{}>'.format(self.id)
+        return "<@{}>".format(self.id)
 
     @property
     def mention_nickname(self):
-        return '<@!{}>'.format(self.id)
+        return "<@!{}>".format(self.id)
 
     def open_dm(self):
         return self.client.api.users_me_dms_create(self.id)
 
     def __str__(self):
-        return u'{}#{}'.format(self.username, str(self.discriminator).zfill(4))
+        return u"{}#{}".format(self.username, str(self.discriminator).zfill(4))
 
     def __repr__(self):
-        return u'<User {} ({})>'.format(self.id, self)
+        return u"<User {} ({})>".format(self.id, self)
 
 
 class GameType(object):
@@ -74,11 +75,11 @@ class GameType(object):
 
 
 class Status(object):
-    ONLINE = 'ONLINE'
-    IDLE = 'IDLE'
-    DND = 'DND'
-    INVISIBLE = 'INVISIBLE'
-    OFFLINE = 'OFFLINE'
+    ONLINE = "ONLINE"
+    IDLE = "IDLE"
+    DND = "DND"
+    INVISIBLE = "INVISIBLE"
+    OFFLINE = "OFFLINE"
 
 
 class Party(SlottedModel):
@@ -128,6 +129,6 @@ class Game(SlottedModel):
 
 
 class Presence(SlottedModel):
-    user = Field(User, alias='user', ignore_dump=['presence'])
+    user = Field(User, alias="user", ignore_dump=["presence"])
     game = Field(Game)
     status = Field(enum(Status))

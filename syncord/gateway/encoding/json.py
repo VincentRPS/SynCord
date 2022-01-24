@@ -9,7 +9,7 @@ from syncord.gateway.encoding.base import BaseEncoder
 
 
 class JSONEncoder(BaseEncoder):
-    TYPE = 'json'
+    TYPE = "json"
 
     @staticmethod
     def encode(obj):

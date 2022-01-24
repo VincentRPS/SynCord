@@ -4,9 +4,9 @@ creating and running bots/clients.
 """
 from __future__ import print_function
 
-import os
-import logging
 import argparse
+import logging
+import os
 
 from gevent import monkey
 
@@ -15,32 +15,46 @@ monkey.patch_all()
 parser = argparse.ArgumentParser()
 
 # Command line specific arguments
-parser.add_argument('--run-bot', help='Run a disco bot on this client', action='store_true', default=False)
-parser.add_argument('--plugin', help='Load plugins into the bot', nargs='*', default=[])
-parser.add_argument('--config', help='Configuration file', default=None)
-parser.add_argument('--shard-auto', help='Automatically run all shards', action='store_true', default=False)
+parser.add_argument(
+    "--run-bot",
+    help="Run a disco bot on this client",
+    action="store_true",
+    default=False,
+)
+parser.add_argument("--plugin", help="Load plugins into the bot", nargs="*", default=[])
+parser.add_argument("--config", help="Configuration file", default=None)
+parser.add_argument(
+    "--shard-auto",
+    help="Automatically run all shards",
+    action="store_true",
+    default=False,
+)
 
 # Configuration overrides
-parser.add_argument('--token', help='Bot Authentication Token', default=None)
-parser.add_argument('--shard-id', help='Current shard number/id', default=None)
-parser.add_argument('--shard-count', help='Total number of shards', default=None)
-parser.add_argument('--max-reconnects', help='Maximum reconnect attempts', default=None)
-parser.add_argument('--log-level', help='log level', default=None)
-parser.add_argument('--manhole', action='store_true', help='Enable the manhole', default=None)
-parser.add_argument('--manhole-bind', help='host:port for the manhole to bind too', default=None)
-parser.add_argument('--encoder', help='Encoder for gateway data', default=None)
+parser.add_argument("--token", help="Bot Authentication Token", default=None)
+parser.add_argument("--shard-id", help="Current shard number/id", default=None)
+parser.add_argument("--shard-count", help="Total number of shards", default=None)
+parser.add_argument("--max-reconnects", help="Maximum reconnect attempts", default=None)
+parser.add_argument("--log-level", help="log level", default=None)
+parser.add_argument(
+    "--manhole", action="store_true", help="Enable the manhole", default=None
+)
+parser.add_argument(
+    "--manhole-bind", help="host:port for the manhole to bind too", default=None
+)
+parser.add_argument("--encoder", help="Encoder for gateway data", default=None)
 
 
 # Mapping of argument names to configuration overrides
 CONFIG_OVERRIDE_MAPPING = {
-    'token': 'token',
-    'shard_id': 'shard_id',
-    'shard_count': 'shard_count',
-    'max_reconnects': 'max_reconnects',
-    'log_level': 'log_level',
-    'manhole': 'manhole_enable',
-    'manhole_bind': 'manhole_bind',
-    'encoder': 'encoder',
+    "token": "token",
+    "shard_id": "shard_id",
+    "shard_count": "shard_count",
+    "max_reconnects": "max_reconnects",
+    "log_level": "log_level",
+    "manhole": "manhole_enable",
+    "manhole_bind": "manhole_bind",
+    "encoder": "encoder",
 }
 
 
@@ -54,8 +68,8 @@ def disco_main(run=False):
     :class:`Client`
         A new Client from the provided command line arguments.
     """
-    from syncord.client import Client, ClientConfig
     from syncord.bot import Bot, BotConfig
+    from syncord.client import Client, ClientConfig
     from syncord.util.logging import setup_logging
 
     # Parse out all our command line arguments
@@ -65,10 +79,10 @@ def disco_main(run=False):
     if args.config:
         config = ClientConfig.from_file(args.config)
     else:
-        if os.path.exists('config.json'):
-            config = ClientConfig.from_file('config.json')
-        elif os.path.exists('config.yaml'):
-            config = ClientConfig.from_file('config.yaml')
+        if os.path.exists("config.json"):
+            config = ClientConfig.from_file("config.json")
+        elif os.path.exists("config.yaml"):
+            config = ClientConfig.from_file("config.yaml")
         else:
             config = ClientConfig()
 
@@ -79,6 +93,7 @@ def disco_main(run=False):
     # Setup the auto-sharder
     if args.shard_auto:
         from syncord.gateway.sharder import AutoSharder
+
         AutoSharder(config).run()
         return
 
@@ -90,9 +105,9 @@ def disco_main(run=False):
 
     # If applicable, build the bot and load plugins
     bot = None
-    if args.run_bot or hasattr(config, 'bot'):
-        bot_config = BotConfig(config.bot) if hasattr(config, 'bot') else BotConfig()
-        if not hasattr(bot_config, 'plugins'):
+    if args.run_bot or hasattr(config, "bot"):
+        bot_config = BotConfig(config.bot) if hasattr(config, "bot") else BotConfig()
+        if not hasattr(bot_config, "plugins"):
             bot_config.plugins = args.plugin
         else:
             bot_config.plugins += args.plugin
@@ -102,8 +117,8 @@ def disco_main(run=False):
     if run:
         (bot or client).run_forever()
 
-    return (bot or client)
+    return bot or client
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     disco_main(True)

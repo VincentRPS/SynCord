@@ -1,9 +1,10 @@
-import gevent
 import weakref
+
+import gevent
 
 
 class ThreadLocal(object):
-    ___slots__ = ['storage']
+    ___slots__ = ["storage"]
 
     def __init__(self):
         self.storage = weakref.WeakKeyDictionary()

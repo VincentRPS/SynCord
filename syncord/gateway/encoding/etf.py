@@ -1,12 +1,11 @@
+from earl import pack, unpack
 from websocket import ABNF
 
 from syncord.gateway.encoding.base import BaseEncoder
 
-from earl import unpack, pack
-
 
 class ETFEncoder(BaseEncoder):
-    TYPE = 'etf'
+    TYPE = "etf"
     OPCODE = ABNF.OPCODE_BINARY
 
     @staticmethod
@@ -15,4 +14,4 @@ class ETFEncoder(BaseEncoder):
 
     @staticmethod
     def decode(obj):
-        return unpack(obj, encoding='utf-8', encode_binary_ext=True)
+        return unpack(obj, encoding="utf-8", encode_binary_ext=True)

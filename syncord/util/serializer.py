@@ -3,29 +3,32 @@ import types
 
 class Serializer(object):
     FORMATS = {
-        'json',
-        'yaml',
-        'pickle',
+        "json",
+        "yaml",
+        "pickle",
     }
 
     @classmethod
     def check_format(cls, fmt):
         if fmt not in cls.FORMATS:
-            raise Exception('Unsupported serialization format: {}'.format(fmt))
+            raise Exception("Unsupported serialization format: {}".format(fmt))
 
     @staticmethod
     def json():
-        from json import loads, dumps
+        from json import dumps, loads
+
         return (loads, dumps)
 
     @staticmethod
     def yaml():
-        from yaml import full_load, dump
+        from yaml import dump, full_load
+
         return (full_load, dump)
 
     @staticmethod
     def pickle():
-        from pickle import loads, dumps
+        from pickle import dumps, loads
+
         return (loads, dumps)
 
     @classmethod
@@ -49,11 +52,11 @@ def load_cell(cell):
 
 def dump_function(func):
     return (
-            func.__code__,
-            func.__name__,
-            func.__defaults__,
-            list(map(dump_cell, func.__closure__)) if func.__closure__ else [],
-        )
+        func.__code__,
+        func.__name__,
+        func.__defaults__,
+        list(map(dump_cell, func.__closure__)) if func.__closure__ else [],
+    )
 
 
 def load_function(args):

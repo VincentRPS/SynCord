@@ -10,6 +10,7 @@ storage.json
 .benchmarks/
 __pycache__
 .venv
+.mypy_cache/
 
 # Documentation stuff
 docs/api/
