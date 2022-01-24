@@ -325,7 +325,7 @@ class ModelMeta(type):
         return super(ModelMeta, mcs).__new__(mcs, name, parents, dct)
 
 
-class Model(metaclass=(ModelMeta, Chainable)):
+class Model(metaclass=ModelMeta):
     __slots__ = ["client"]
 
     def __init__(self, *args, **kwargs):

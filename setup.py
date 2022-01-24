@@ -25,13 +25,13 @@ extras_require = {
 }
 
 setup(
-    name="disco-py",
-    author="b1nzy",
-    url="https://github.com/b1naryth1ef/disco",
+    name="syncord",
+    author="b1nzy, VincentRPS",
+    url="https://github.com/VincentRPS/SynCord",
     version=VERSION,
-    packages=find_packages(include=["disco*"]),
+    packages=find_packages(include=["syncord*"]),
     license="MIT",
-    description="A Python library for Discord",
+    description="A Python library for Discord, a fork of disco",
     long_description=readme,
     long_description_content_type="text/markdown",
     include_package_data=True,

@@ -15,7 +15,7 @@ from syncord.gateway.events import *
 from syncord.gateway.ipc import *
 from syncord.gateway.packets import *
 # Not imported, GIPC is required but not provided by default
-# from disco.gateway.sharder import *
+# from syncord.gateway.sharder import *
 from syncord.types.base import *
 from syncord.types.channel import *
 from syncord.types.guild import *

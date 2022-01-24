@@ -4,7 +4,7 @@ Disco provides a built-in set of tools for building and running Discord bots whi
 
 ## Creating a Bot
 
-The first step to creating bots is to actually register them on Discord itself. To do this, you'll need to be logged into your Discord account on the browser and then navigate to [My Apps](https://discordapp.com/developers/applications/me). Here you'll have the option to create a new application, and once created you can add a bot user (by clicking "Create a Bot User") to your application. Finally, you'll want to keep track of the bot user token which can be shown by clicking the "click to reveal" link next to the token field.
+The first step to creating bots is to actually register them on Discord itself. To do this, you'll need to be logged into your Discord account on the browser and then navigate to [My Apps](https://discord.com/developers/applications/me). Here you'll have the option to create a new application, and once created you can add a bot user (by clicking "Create a Bot User") to your application. Finally, you'll want to keep track of the bot user token which can be shown by clicking the "click to reveal" link next to the token field.
 
 Once you have a Discord bot account, you can then setup your workspace. For now we'll just need a folder (perhaps called `disco-tutorial`) with a few files in it:
 
@@ -46,7 +46,7 @@ If you want to use a prefix (or even multiple), you add something this into the 
 Now we're ready to write our plugin. Plugins are used to isolate the functionality of your bot into components. Plugins can be dynamically loaded, unloaded and reloaded at runtime. Lets start off by writing a plugin with a "ping" command;
 
 ```python
-from disco.bot import Plugin
+from syncord.bot import Plugin
 
 
 class TutorialPlugin(Plugin):
@@ -59,7 +59,7 @@ Now that we have a plugin setup and our configuration is ready, we can run and t
 
 
 ```sh
-python -m disco.cli --config config.json
+python -m syncord.cli --config config.json
 ```
 
 If all is successful, you can then test your bot by mentioning it with the command, like so:

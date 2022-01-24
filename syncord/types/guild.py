@@ -71,7 +71,7 @@ class GuildEmoji(Emoji):
 
     @property
     def url(self):
-        return "https://cdn.discordapp.com/emojis/{}.{}".format(
+        return "https://cdn.discord.com/emojis/{}.{}".format(
             self.id, "gif" if self.animated else "png"
         )
 
@@ -100,7 +100,7 @@ class Role(SlottedModel):
         Whether this role is managed by an integration.
     color : int
         The RGB color of this role.
-    permissions : :class:`disco.types.permissions.PermissionsValue`
+    permissions : :class:`syncord.types.permissions.PermissionsValue`
         The permissions this role grants.
     position : int
         The position of this role in the hierarchy.
@@ -150,7 +150,7 @@ class GuildMember(SlottedModel):
 
     Attributes
     ----------
-    user : :class:`disco.types.user.User`
+    user : :class:`syncord.types.user.User`
         The user object of this member.
     guild_id : snowflake
         The guild this member is part of.
@@ -191,7 +191,7 @@ class GuildMember(SlottedModel):
         """
         Returns
         -------
-        Optional[:class:`disco.types.voice.VoiceState`]
+        Optional[:class:`syncord.types.voice.VoiceState`]
             Returns the voice state for the member if they are currently connected
             to the guild's voice server.
         """
@@ -321,13 +321,13 @@ class Guild(SlottedModel, Permissible):
         Extra features enabled for this guild.
     members : dict(snowflake, :class:`GuildMember`)
         All of the guild's members.
-    channels : dict(snowflake, :class:`disco.types.channel.Channel`)
+    channels : dict(snowflake, :class:`syncord.types.channel.Channel`)
         All of the guild's channels.
     roles : dict(snowflake, :class:`Role`)
         All of the guild's roles.
     emojis : dict(snowflake, :class:`GuildEmoji`)
         All of the guild's emojis.
-    voice_states : dict(str, :class:`disco.types.voice.VoiceState`)
+    voice_states : dict(str, :class:`syncord.types.voice.VoiceState`)
         All of the guild's voice states.
     premium_tier : int
         Guild's premium tier.
@@ -384,7 +384,7 @@ class Guild(SlottedModel, Permissible):
 
         Returns
         -------
-        :class:`disco.types.permissions.PermissionValue`
+        :class:`syncord.types.permissions.PermissionValue`
             Computed permission value for the user.
         """
         if not isinstance(member, GuildMember):
@@ -410,7 +410,7 @@ class Guild(SlottedModel, Permissible):
 
         Returns
         -------
-        :class:`disco.types.voice.VoiceState`
+        :class:`syncord.types.voice.VoiceState`
             The voice state for the user in this guild.
         """
         user = to_snowflake(user)
@@ -593,11 +593,11 @@ class Guild(SlottedModel, Permissible):
             return ""
 
         if self.icon.startswith("a_"):
-            return "https://cdn.discordapp.com/icons/{}/{}.{}?size={}".format(
+            return "https://cdn.discord.com/icons/{}/{}.{}?size={}".format(
                 self.id, self.icon, animated_format, size
             )
         else:
-            return "https://cdn.discordapp.com/icons/{}/{}.{}?size={}".format(
+            return "https://cdn.discord.com/icons/{}/{}.{}?size={}".format(
                 self.id, self.icon, still_format, size
             )
 
@@ -611,7 +611,7 @@ class Guild(SlottedModel, Permissible):
         if not self.splash:
             return ""
 
-        return "https://cdn.discordapp.com/splashes/{}/{}.{}?size={}".format(
+        return "https://cdn.discord.com/splashes/{}/{}.{}?size={}".format(
             self.id, self.splash, fmt, size
         )
 
@@ -619,7 +619,7 @@ class Guild(SlottedModel, Permissible):
         if not self.banner:
             return ""
 
-        return "https://cdn.discordapp.com/banners/{}/{}.{}?size={}".format(
+        return "https://cdn.discord.com/banners/{}/{}.{}?size={}".format(
             self.id, self.banner, fmt, size
         )
 

@@ -36,7 +36,7 @@ class Responses(list):
 
 class APIClient(LoggingClass):
     """
-    An abstraction over a :class:`disco.api.http.HTTPClient`, which composes
+    An abstraction over a :class:`syncord.api.http.HTTPClient`, which composes
     requests from provided data, and fits models with the returned data. The APIClient
     is the only path to the API used within models/other interfaces, and it's
     the recommended path for all third-party users/implementations.
@@ -46,15 +46,15 @@ class APIClient(LoggingClass):
     token : str
         The Discord authentication token (without prefixes) to be used for all
         HTTP requests.
-    client : Optional[:class:`disco.client.Client`]
+    client : Optional[:class:`syncord.client.Client`]
         The Disco client this APIClient is a member of. This is used when constructing
         and fitting models from response data.
 
     Attributes
     ----------
-    client : Optional[:class:`disco.client.Client`]
+    client : Optional[:class:`syncord.client.Client`]
         The Disco client this APIClient is a member of.
-    http : :class:`disco.http.HTTPClient`
+    http : :class:`syncord.http.HTTPClient`
         The HTTPClient this APIClient uses for all requests.
     """
 

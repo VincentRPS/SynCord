@@ -21,7 +21,7 @@ class ClientConfig(Config):
     ----------
     token : str
         Discord authentication token, can be validated using the
-        `disco.util.token.is_valid_token` function.
+        `syncord.util.token.is_valid_token` function.
     shard_id : int
         The shard ID for the current client instance.
     shard_count : int
@@ -59,8 +59,8 @@ class Client(LoggingClass):
     """
     Class representing the base entry point that should be used in almost all
     implementation cases. This class wraps the functionality of both the REST API
-    (`disco.api.client.APIClient`) and the realtime gateway API
-    (`disco.gateway.client.GatewayClient`).
+    (`syncord.api.client.APIClient`) and the realtime gateway API
+    (`syncord.gateway.client.GatewayClient`).
 
     Parameters
     ----------

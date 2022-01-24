@@ -2,6 +2,7 @@ import importlib
 import inspect
 import os
 import re
+import importlib
 
 import gevent
 from gevent.pywsgi import WSGIServer
@@ -25,7 +26,7 @@ class BotConfig(Config):
     Attributes
     ----------
     levels : dict(snowflake, str)
-        Mapping of user IDs/role IDs to :class:`disco.bot.commands.CommandLevels`
+        Mapping of user IDs/role IDs to :class:`syncord.bot.commands.CommandLevels`
         which is used for the default commands_level_getter.
     plugins : list[string]
         List of plugin modules to load.
@@ -56,7 +57,7 @@ class BotConfig(Config):
         helpful for allowing edits to typed commands.
     commands_level_getter : function
         If set, a function which when given a GuildMember or User, returns the
-        relevant :class:`disco.bot.commands.CommandLevels`.
+        relevant :class:`syncord.bot.commands.CommandLevels`.
     commands_group_abbrev : bool
         If true, command groups may be abbreviated to the least common variation.
         E.g. the grouping 'test' may be abbreviated down to 't', unless 'tag' exists,
@@ -122,7 +123,7 @@ class Bot(LoggingClass):
 
     Parameters
     ----------
-    client : :class:`disco.client.Client`
+    client : :class:`syncord.client.Client`
         The client this bot should utilize for its connection.
     config : Optional[:class:`BotConfig`]
         The configuration to use for this bot. If not provided will use the defaults
@@ -130,11 +131,11 @@ class Bot(LoggingClass):
 
     Attributes
     ----------
-    client : `disco.client.Client`
+    client : `syncord.client.Client`
         The client instance for this bot.
     config : `BotConfig`
         The bot configuration instance for this bot.
-    plugins : dict(str, :class:`disco.bot.plugin.Plugin`)
+    plugins : dict(str, :class:`syncord.bot.plugin.Plugin`)
         Any plugins this bot has loaded.
     """
 
@@ -219,12 +220,12 @@ class Bot(LoggingClass):
     def from_cli(cls, *plugins):
         """
         Creates a new instance of the bot using the utilities inside of the
-        :mod:`disco.cli` module. Allows passing in a set of uninitialized
+        :mod:`syncord.cli` module. Allows passing in a set of uninitialized
         plugin classes to load.
 
         Parameters
         ---------
-        plugins : Optional[list(:class:`disco.bot.plugin.Plugin`)]
+        plugins : Optional[list(:class:`syncord.bot.plugin.Plugin`)]
             Any plugins to load after creating the new bot instance.
         """
         from syncord.cli import disco_main
@@ -310,12 +311,12 @@ class Bot(LoggingClass):
             `{'user': True, 'everyone': False, 'role': False}`
         prefixes : list[string]
             A list of prefixes to check the message starts with.
-        msg : :class:`disco.types.message.Message`
+        msg : :class:`syncord.types.message.Message`
             The message object to parse and find matching commands for.
 
         Yields
         -------
-        tuple(:class:`disco.bot.command.Command`, `re.MatchObject`)
+        tuple(:class:`syncord.bot.command.Command`, `re.MatchObject`)
             All commands the message triggers.
         """
         # somebody better figure out what this yields...
@@ -420,7 +421,7 @@ class Bot(LoggingClass):
 
         Parameters
         ---------
-        msg : :class:`disco.types.message.Message`
+        msg : :class:`syncord.types.message.Message`
             The newly created or updated message object to parse/handle.
 
         Returns
@@ -489,7 +490,7 @@ class Bot(LoggingClass):
 
         Parameters
         ----------
-        inst : subclass (or instance therein) of `disco.bot.plugin.Plugin`
+        inst : subclass (or instance therein) of `syncord.bot.plugin.Plugin`
             Plugin class to initialize and load.
         config : Optional
             The configuration to load the plugin with.
@@ -525,7 +526,7 @@ class Bot(LoggingClass):
 
         Parameters
         ----------
-        cls : subclass of :class:`disco.bot.plugin.Plugin`
+        cls : subclass of :class:`syncord.bot.plugin.Plugin`
             Plugin class to unload and remove.
         """
         if cls.__name__ not in self.plugins:
@@ -546,7 +547,7 @@ class Bot(LoggingClass):
         config = self.plugins[cls.__name__].config
 
         ctx = self.rmv_plugin(cls)
-        module = reload_module(inspect.getmodule(cls))
+        module = importlib.reload(inspect.getmodule(cls))
         self.add_plugin(getattr(module, cls.__name__), config, ctx)
 
     def run_forever(self):

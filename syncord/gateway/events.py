@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-from syncord.types.base import (UNSET, AutoDictField, Field, ListField, Model,
+from syncord.types.base import (UNSET, AutoDictField, Field, ListField,
                                 ModelMeta, datetime, snowflake)
 from syncord.types.channel import Channel, PermissionOverwrite
 from syncord.types.guild import Guild, GuildEmoji, GuildMember, Role
@@ -23,7 +23,7 @@ class GatewayEventMeta(ModelMeta):
         return obj
 
 
-class GatewayEvent(metaclass=(GatewayEventMeta, Model)):
+class GatewayEvent(metaclass=GatewayEventMeta):
     """
     The GatewayEvent class wraps various functionality for events passed to us
     over the gateway websocket, and serves as a simple proxy to inner values for
@@ -133,11 +133,11 @@ class Ready(GatewayEvent):
         The gateway version.
     session_id : str
         The session ID.
-    user : :class:`disco.types.user.User`
+    user : :class:`syncord.types.user.User`
         The user object for the authenticated account.
-    guilds : list[:class:`disco.types.guild.Guild`
+    guilds : list[:class:`syncord.types.guild.Guild`
         All guilds this account is a member of. These are shallow guild objects.
-    private_channels list[:class:`disco.types.channel.Channel`]
+    private_channels list[:class:`syncord.types.channel.Channel`]
         All private channels (DMs) open for this account.
     """
 
@@ -161,7 +161,7 @@ class GuildCreate(GatewayEvent):
 
     Attributes
     ----------
-    guild : :class:`disco.types.guild.Guild`
+    guild : :class:`syncord.types.guild.Guild`
         The guild being created (e.g. joined).
     unavailable : bool
         If false, this guild is coming online from a previously unavailable state,
@@ -186,7 +186,7 @@ class GuildUpdate(GatewayEvent):
 
     Attributes
     ----------
-    guild : :class:`disco.types.guild.Guild`
+    guild : :class:`syncord.types.guild.Guild`
         The updated guild object.
     """
 
@@ -222,7 +222,7 @@ class ChannelCreate(GatewayEvent):
 
     Attributes
     ----------
-    channel : :class:`disco.types.channel.Channel`
+    channel : :class:`syncord.types.channel.Channel`
         The channel which was created.
     """
 
@@ -234,7 +234,7 @@ class ChannelUpdate(ChannelCreate):
 
     Attributes
     ----------
-    channel : :class:`disco.types.channel.Channel`
+    channel : :class:`syncord.types.channel.Channel`
         The channel which was updated.
     """
 
@@ -248,7 +248,7 @@ class ChannelDelete(ChannelCreate):
 
     Attributes
     ----------
-    channel : :class:`disco.types.channel.Channel`
+    channel : :class:`syncord.types.channel.Channel`
         The channel being deleted.
     """
 
@@ -278,7 +278,7 @@ class GuildBanAdd(GatewayEvent):
     ----------
     guild_id : snowflake
         The ID of the guild the user is being banned from.
-    user : :class:`disco.types.user.User`
+    user : :class:`syncord.types.user.User`
         The user being banned from the guild.
     """
 
@@ -299,7 +299,7 @@ class GuildBanRemove(GuildBanAdd):
     ----------
     guild_id : snowflake
         The ID of the guild the user is being unbanned from.
-    user : :class:`disco.types.user.User`
+    user : :class:`syncord.types.user.User`
         The user being unbanned from the guild.
     """
 
@@ -316,7 +316,7 @@ class GuildEmojisUpdate(GatewayEvent):
     ----------
     guild_id : snowflake
         The ID of the guild the emojis are being updated in.
-    emojis : list[:class:`disco.types.guild.Emoji`]
+    emojis : list[:class:`syncord.types.guild.Emoji`]
         The new set of emojis for the guild.
     """
 
@@ -345,11 +345,11 @@ class GuildMembersChunk(GatewayEvent):
     ----------
     guild_id : snowflake
         The ID of the guild this member chunk is for.
-    members : list[:class:`disco.types.guild.GuildMember`]
+    members : list[:class:`syncord.types.guild.GuildMember`]
         The chunk of members.
     not_found : list[snowflake]
         An array of invalid requested guild members.
-    presences : list[:class:`disco.types.user.Presence`]
+    presences : list[:class:`syncord.types.user.Presence`]
         An array of requested member presence states.
     """
 
@@ -370,7 +370,7 @@ class GuildMemberAdd(GatewayEvent):
 
     Attributes
     ----------
-    member : :class:`disco.types.guild.GuildMember`
+    member : :class:`syncord.types.guild.GuildMember`
         The member that has joined the guild.
     """
 
@@ -384,7 +384,7 @@ class GuildMemberRemove(GatewayEvent):
     ----------
     guild_id : snowflake
         The ID of the guild the member left from.
-    user : :class:`disco.types.user.User`
+    user : :class:`syncord.types.user.User`
         The user who was removed from the guild.
     """
 
@@ -403,7 +403,7 @@ class GuildMemberUpdate(GatewayEvent):
 
     Attributes
     ----------
-    member : :class:`disco.types.guild.GuildMember`
+    member : :class:`syncord.types.guild.GuildMember`
         The member being updated
     """
 
@@ -418,7 +418,7 @@ class GuildRoleCreate(GatewayEvent):
     ----------
     guild_id : snowflake
         The ID of the guild where the role was created.
-    role : :class:`disco.types.guild.Role`
+    role : :class:`syncord.types.guild.Role`
         The role that was created.
     """
 
@@ -438,7 +438,7 @@ class GuildRoleUpdate(GuildRoleCreate):
     ----------
     guild_id : snowflake
         The ID of the guild where the role was created.
-    role : :class:`disco.types.guild.Role`
+    role : :class:`syncord.types.guild.Role`
         The role that was created.
     """
 
@@ -474,7 +474,7 @@ class MessageCreate(GatewayEvent):
 
     Attributes
     ----------
-    message : :class:`disco.types.message.Message`
+    message : :class:`syncord.types.message.Message`
         The message being created.
     guild_id : snowflake
         The ID of the guild this message comes from.
@@ -490,7 +490,7 @@ class MessageUpdate(MessageCreate):
 
     Attributes
     ----------
-    message : :class:`disco.types.message.Message`
+    message : :class:`syncord.types.message.Message`
         The message being updated.
     guild_id : snowflake
         The ID of the guild this message exists in.
@@ -560,7 +560,7 @@ class PresenceUpdate(GatewayEvent):
 
     Attributes
     ----------
-    presence : :class:`disco.types.user.Presence`
+    presence : :class:`syncord.types.user.Presence`
         The updated presence object.
     guild_id : snowflake
         The guild this presence update is for.
@@ -605,7 +605,7 @@ class VoiceStateUpdate(GatewayEvent):
 
     Attributes
     ----------
-    state : :class:`disco.models.voice.VoiceState`
+    state : :class:`syncord.models.voice.VoiceState`
         The voice state which was updated.
     """
 
@@ -659,7 +659,7 @@ class MessageReactionAdd(GatewayEvent):
         The ID of the message for which the reaction was added too.
     user_id : snowflake
         The ID of the user who added the reaction.
-    emoji : :class:`disco.types.message.MessageReactionEmoji`
+    emoji : :class:`syncord.types.message.MessageReactionEmoji`
         The emoji which was added.
     """
 
@@ -700,7 +700,7 @@ class MessageReactionRemove(GatewayEvent):
         The ID of the message for which the reaction was removed from.
     user_id : snowflake
         The ID of the user who originally added the reaction.
-    emoji : :class:`disco.types.message.MessageReactionEmoji`
+    emoji : :class:`syncord.types.message.MessageReactionEmoji`
         The emoji which was removed.
     """
 
@@ -753,6 +753,6 @@ class UserUpdate(GatewayEvent):
 
     Attributes
     -----
-    user : :class:`disco.types.user.User`
+    user : :class:`syncord.types.user.User`
         The updated user object.
     """

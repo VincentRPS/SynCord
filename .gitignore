@@ -11,6 +11,7 @@ storage.json
 __pycache__
 .venv
 .mypy_cache/
+test.py
 
 # Documentation stuff
 docs/api/
@@ -26,3 +27,4 @@ node_modules/
 
 # macOS
 .DS_Store
+syncord.egg-info

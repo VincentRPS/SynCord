@@ -8,7 +8,7 @@ from syncord.util.logging import LoggingClass
 class RouteState(LoggingClass):
     """
     An object which stores ratelimit state for a given method/url route
-    combination (as specified in :class:`disco.api.http.Routes`).
+    combination (as specified in :class:`syncord.api.http.Routes`).
 
     Parameters
     ----------

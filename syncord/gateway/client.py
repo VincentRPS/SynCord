@@ -18,7 +18,7 @@ ZLIB_SUFFIX = b"\x00\x00\xff\xff"
 
 
 class GatewayClient(LoggingClass):
-    GATEWAY_VERSION = 6
+    GATEWAY_VERSION = 9
 
     def __init__(
         self,

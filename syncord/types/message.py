@@ -409,7 +409,7 @@ class Message(SlottedModel):
         The channel ID this message was sent in.
     type : `MessageType`
         Type of the message.
-    author : :class:`disco.types.user.User`
+    author : :class:`syncord.types.user.User`
         The author of this message.
     content : str
         The unicode contents of this message.

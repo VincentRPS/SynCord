@@ -2,9 +2,8 @@
 
 [![PyPI](https://img.shields.io/pypi/l/disco-py.svg)](https://pypi.python.org/pypi/disco-py/)
 [![PyPI](https://img.shields.io/pypi/v/disco-py.svg)](https://pypi.python.org/pypi/disco-py/)
-[![TravisCI](https://img.shields.io/travis/b1naryth1ef/disco.svg)](https://travis-ci.org/b1naryth1ef/disco/)
 
-Disco is an extensive and extendable Python 2.x/3.x library for the [Discord API](https://discordapp.com/developers/docs/intro). Disco boasts the following major features:
+Disco is an extensive and extendable Python 2.x/3.x library for the [Discord API](https://discord.com/developers/docs/intro). Disco boasts the following major features:
 
 - Expressive, functional interface that gets out of the way
 - Built for high-performance and efficiency
@@ -28,7 +27,7 @@ Disco was built to run both as a generic-use library, and a standalone bot toolk
 Simple bot using the builtin bot authoring tools:
 
 ```python
-from disco.bot import Bot, Plugin
+from syncord.bot import Bot, Plugin
 
 
 class SimplePlugin(Plugin):
@@ -50,7 +49,7 @@ class SimplePlugin(Plugin):
 
 Using the default bot configuration, we can now run this script like so:
 
-`python -m disco.cli --token="MY_DISCORD_TOKEN" --run-bot --plugin simpleplugin`
+`python -m syncord --token="MY_DISCORD_TOKEN" --run-bot --plugin simpleplugin`
 
 And commands can be triggered by mentioning the bot (configured by the BotConfig.command\_require\_mention flag):
 

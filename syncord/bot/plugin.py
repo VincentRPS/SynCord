@@ -231,20 +231,20 @@ class Plugin(LoggingClass, PluginDeco):
 
     Parameters
     ----------
-    bot : :class:`disco.bot.Bot`
+    bot : :class:`syncord.bot.Bot`
         The bot this plugin is a member of.
     config : any
         The configuration data for this plugin.
 
     Attributes
     ----------
-    client : :class:`disco.client.Client`
+    client : :class:`syncord.client.Client`
         An alias to the client the bot is running with.
-    state : :class:`disco.state.State`
+    state : :class:`syncord.state.State`
         An alias to the state object for the client.
     listeners : list
         List of all bound listeners this plugin owns.
-    commands : list(:class:`disco.bot.command.Command`)
+    commands : list(:class:`syncord.bot.command.Command`)
         List of all commands this plugin owns.
     """
 
@@ -453,9 +453,9 @@ class Plugin(LoggingClass, PluginDeco):
         func : function
             The function to be registered.
         args
-            Arguments to pass onto the :class:`disco.bot.command.Command` object.
+            Arguments to pass onto the :class:`syncord.bot.command.Command` object.
         kwargs
-            Keyword arguments to pass onto the :class:`disco.bot.command.Command`
+            Keyword arguments to pass onto the :class:`syncord.bot.command.Command`
             object.
         """
         self.commands.append(Command(self, func, *args, **kwargs))

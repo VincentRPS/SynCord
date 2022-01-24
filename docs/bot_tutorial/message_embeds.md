@@ -20,7 +20,7 @@ An embed can contain the following components:
 ## Creating an embed
 Creating an embed is simple, and can be done like this:
 ```py
-from disco.types.message import MessageEmbed #We need this to create the embed
+from syncord.types.message import MessageEmbed #We need this to create the embed
 from datetime import datetime #We need this to set the timestamp
 
 embed = MessageEmbed()

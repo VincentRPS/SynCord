@@ -41,11 +41,11 @@ class PermissionOverwrite(ChannelSubType):
     ----------
     id : snowflake
         The overwrite ID.
-    type : :const:`disco.types.channel.PermissionsOverwriteType`
+    type : :const:`syncord.types.channel.PermissionsOverwriteType`
         The overwrite type.
-    allow : :class:`disco.types.permissions.PermissionValue`
+    allow : :class:`syncord.types.permissions.PermissionValue`
         All allowed permissions.
-    deny : :class:`disco.types.permissions.PermissionValue`
+    deny : :class:`syncord.types.permissions.PermissionValue`
         All denied permissions.
     """
 
@@ -116,11 +116,11 @@ class Channel(SlottedModel, Permissible):
         The channel's bitrate.
     user_limit : int
         The channel's user limit.
-    recipients : list(:class:`disco.types.user.User`)
+    recipients : list(:class:`syncord.types.user.User`)
         Members of this channel (if this is a DM channel).
     type : :const:`ChannelType`
         The type of this channel.
-    overwrites : dict(snowflake, :class:`disco.types.channel.PermissionOverwrite`)
+    overwrites : dict(snowflake, :class:`syncord.types.channel.PermissionOverwrite`)
         Channel permissions overwrites.
     """
 
@@ -159,7 +159,7 @@ class Channel(SlottedModel, Permissible):
 
         Returns
         -------
-        :class:`disco.types.permissions.PermissionValue`
+        :class:`syncord.types.permissions.PermissionValue`
             Computed permission value for the user.
         """
         if not self.guild_id:
@@ -359,7 +359,7 @@ class Channel(SlottedModel, Permissible):
 
         Returns
         -------
-        `disco.types.message.Message`
+        `syncord.types.message.Message`
             The created message.
         """
         return self.client.api.channels_messages_create(self.id, *args, **kwargs)
@@ -520,7 +520,7 @@ class MessageIterator(object):
 
     Parameters
     ----------
-    client : :class:`disco.client.Client`
+    client : :class:`syncord.client.Client`
         The disco client instance to use when making requests.
     channel : `Channel`
         The channel to iterate within.
@@ -567,7 +567,7 @@ class MessageIterator(object):
 
     def fill(self):
         """
-        Fills the internal buffer up with :class:`disco.types.message.Message` objects from the API.
+        Fills the internal buffer up with :class:`syncord.types.message.Message` objects from the API.
 
         Returns a boolean indicating whether items were added to the buffer.
         """

@@ -6,7 +6,7 @@ In the case of these examples, when you send `!help` or `!info` the bot will rep
 
 ## Basic commands
 
-Creating commands in Disco is really easy because of the [Plugins](https://b1naryth1ef.github.io/disco/bot_tutorial/building_block_plugins.html) that are a core fundamental of Disco. For more info on them, read back in the [Plugins](https://b1naryth1ef.github.io/disco/bot_tutorial/building_block_plugins.html) section of this tutorial. Creating a basic command is done as follows:
+Creating commands in Disco is really easy because of the [Plugins](https://b1naryth1ef.github.io/disco/bot_tutorial/building_block_plugins.html) that are a core fundamental of syncord. For more info on them, read back in the [Plugins](https://b1naryth1ef.github.io/disco/bot_tutorial/building_block_plugins.html) section of this tutorial. Creating a basic command is done as follows:
 First, create a Plugin class:
 ```py
 class myPlugin(Plugin):

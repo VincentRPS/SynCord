@@ -70,7 +70,7 @@ class State(object):
     ----------
     EVENTS : list(str)
         A list of all events the State object binds to.
-    client : `disco.client.Client`
+    client : `syncord.client.Client`
         The Client instance this state is attached to.
     config : `StateConfig`
         The configuration for this state instance.

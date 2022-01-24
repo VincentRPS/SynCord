@@ -16,11 +16,11 @@ class Invite(SlottedModel):
     ----------
     code : str
         The invite code.
-    guild : :class:`disco.types.guild.Guild`
+    guild : :class:`syncord.types.guild.Guild`
         The guild this invite is for.
-    channel : :class:`disco.types.channel.Channel`
+    channel : :class:`syncord.types.channel.Channel`
         The channel this invite is for.
-    target_user : :class:`disco.types.user.User`
+    target_user : :class:`syncord.types.user.User`
         The user this invite targets.
     target_user_type : int
         The type of user target for this invite.
@@ -28,7 +28,7 @@ class Invite(SlottedModel):
         The approximate count of online members.
     approximate_member_count : int
         The approximate count of total members.
-    inviter : :class:`disco.types.user.User`
+    inviter : :class:`syncord.types.user.User`
         The user who created this invite.
     uses : int
         The current number of times the invite was used.

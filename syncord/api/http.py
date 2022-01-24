@@ -242,7 +242,7 @@ class HTTPClient(LoggingClass):
     Discords rate-limit headers, authorization, and request/response validation.
     """
 
-    BASE_URL = "https://discordapp.com/api/v7"
+    BASE_URL = "https://discord.com/api/v9"
     MAX_RETRIES = 5
 
     def __init__(self, token, after_request=None):
@@ -273,7 +273,7 @@ class HTTPClient(LoggingClass):
     def call(self, route, args=None, **kwargs):
         """
         Makes a request to the given route (as specified in
-        :class:`disco.api.http.Routes`) with a set of URL arguments, and keyword
+        :class:`syncord.api.http.Routes`) with a set of URL arguments, and keyword
         arguments passed to requests.
 
         Parameters

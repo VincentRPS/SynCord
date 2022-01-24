@@ -36,7 +36,7 @@ class CommandEvent(object):
     ----------
     command : :class:`Command`
         The command this event was created for (aka the triggered command).
-    msg : :class:`disco.types.message.Message`
+    msg : :class:`syncord.types.message.Message`
         The message object which triggered this command.
     match : :class:`re.MatchObject`
         The regex match object for the command.
@@ -117,7 +117,7 @@ class Command(object):
 
     Attributes
     ----------
-    plugin : :class:`disco.bot.plugin.Plugin`
+    plugin : :class:`syncord.bot.plugin.Plugin`
         The plugin this command is a member of.
     func : function
         The function which is called when this command is triggered.

@@ -10,7 +10,7 @@ from syncord.util.logging import LoggingClass
 class Websocket(LoggingClass, websocket.WebSocketApp):
     """
     A utility class which wraps the functionality of :class:`websocket.WebSocketApp`
-    changing its behavior to better conform with standard style across disco.
+    changing its behavior to better conform with standard style across syncord.
 
     The major difference comes with the move from callback functions, to all
     events being piped into a single emitter.

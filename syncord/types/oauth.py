@@ -52,7 +52,7 @@ class Application(SlottedModel):
         if not self.icon:
             return ""
 
-        return "https://cdn.discordapp.com/app-icons/{}/{}.{}?size={}".format(
+        return "https://cdn.discord.com/app-icons/{}/{}.{}?size={}".format(
             self.id, self.icon, fmt, size
         )
 
@@ -60,7 +60,7 @@ class Application(SlottedModel):
         if not self.cover_image:
             return ""
 
-        return "https://cdn.discordapp.com/app-icons/{}/{}.{}?size={}".format(
+        return "https://cdn.discord.com/app-icons/{}/{}.{}?size={}".format(
             self.id, self.cover_image, fmt, size
         )
 
