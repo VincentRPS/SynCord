@@ -1,6 +1,6 @@
-from disco.state import State, StateConfig
-from disco.gateway.events import VoiceStateUpdate
-from disco.util.emitter import Emitter
+from syncord.state import State, StateConfig
+from syncord.gateway.events import VoiceStateUpdate
+from syncord.util.emitter import Emitter
 
 
 class MockClient(object):

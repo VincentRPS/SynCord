@@ -1,4 +1,4 @@
-from disco.types.channel import Channel, ChannelType
+from syncord.types.channel import Channel, ChannelType
 
 
 def test_deprecated_nsfw_channel():

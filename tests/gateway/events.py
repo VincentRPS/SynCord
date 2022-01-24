@@ -1,4 +1,4 @@
-from disco.gateway.events import GatewayEvent, Resumed
+from syncord.gateway.events import GatewayEvent, Resumed
 
 
 def create_resumed_payload():

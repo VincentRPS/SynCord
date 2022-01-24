@@ -1,9 +1,7 @@
 from __future__ import print_function
 
-import six
-
 from unittest import TestCase
-from disco.types.base import Model, Field, enum, snowflake, ConversionError
+from syncord.types.base import Model, Field, enum, snowflake, ConversionError
 
 
 class _A(Model):
@@ -96,7 +94,7 @@ class TestModel(TestCase):
                 return self.v
 
         class _M(Model):
-            field = Field(Object, cast=six.text_type)
+            field = Field(Object, cast=str)
 
         inst = _M(field=u'wowza')
         self.assertEqual(inst.to_dict(), {'field': u'wowza'})

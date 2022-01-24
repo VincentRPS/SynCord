@@ -1,6 +1,6 @@
 import pytest
 
-from disco.types.base import Model, Field, cached_property, text
+from syncord.types.base import Model, Field, cached_property, text
 
 
 @pytest.fixture

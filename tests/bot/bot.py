@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from disco.client import ClientConfig, Client
-from disco.bot.bot import Bot
-from disco.bot.command import Command
+from syncord.client import ClientConfig, Client
+from syncord.bot.bot import Bot
+from syncord.bot.command import Command
 
 
 class Object(object):

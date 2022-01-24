@@ -1,4 +1,4 @@
-from disco.types.user import User, DefaultAvatars
+from syncord.types.user import User, DefaultAvatars
 
 
 def test_user_avatar_url():

@@ -1,5 +1,5 @@
-from disco.bot import Plugin
-from disco.voice import VoiceConnection, YoutubeDLPlayable
+from syncord.bot import Plugin
+from syncord.voice import VoiceConnection, YoutubeDLPlayable
 
 
 class MusicPlugin(Plugin):

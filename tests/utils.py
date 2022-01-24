@@ -1,8 +1,8 @@
 import time
 import random
 
-from disco.api.client import APIClient as _APIClient
-from disco.util.snowflake import from_timestamp_ms
+from syncord.api.client import APIClient as _APIClient
+from syncord.util.snowflake import from_timestamp_ms
 
 
 class CallContainer(object):

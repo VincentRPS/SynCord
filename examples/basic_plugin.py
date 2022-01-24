@@ -1,7 +1,7 @@
 from __future__ import print_function
 
-from disco.bot import Plugin
-from disco.util.sanitize import S
+from syncord.bot import Plugin
+from syncord.util.sanitize import S
 
 
 class BasicPlugin(Plugin):
