@@ -18,7 +18,7 @@ extras_require = {
     "performance": [
         "earl-etf==2.1.2",
         "ujson==1.35",
-        "wsaccel==0.6.2",
+        "wsaccel==0.6.3",
     ],
     "sharding": ["gipc==1.3.0"],
     "docs": ["biblio==0.0.4"],
