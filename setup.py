@@ -20,7 +20,7 @@ extras_require = {
         "ujson==1.35",
         "wsaccel==0.6.2",
     ],
-    "sharding": ["gipc==0.6.0"],
+    "sharding": ["gipc==1.3.0"],
     "docs": ["biblio==0.0.4"],
 }
 
@@ -38,14 +38,14 @@ setup(
     install_requires=requirements,
     extras_require=extras_require,
     test_suite="tests",
-    setup_requires=["pytest-runner==2.11.1"],
+    setup_requires=["pytest-runner==5.3.1"],
     tests_require=[
         "pytest==3.2.1",
         "pytest-benchmark==3.1.1",
-        "flake8-tuple==0.2.13",
+        "flake8-tuple==0.4.1",
         "flake8-quotes==1.0.0",
         "flake8-comprehensions==1.4.1",
-        "flake8-commas==2.0.0",
+        "flake8-commas==2.1.0",
         "flake8-builtins==1.4.1",
     ],
     classifiers=[
