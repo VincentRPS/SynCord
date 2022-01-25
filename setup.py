@@ -20,7 +20,7 @@ extras_require = {
         "ujson==1.35",
         "wsaccel==0.6.2",
     ],
-    "sharding": ["gipc==0.6.0"],
+    "sharding": ["gipc==1.3.0"],
     "docs": ["biblio==0.0.4"],
 }
 
