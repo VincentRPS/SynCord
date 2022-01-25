@@ -17,7 +17,7 @@ extras_require = {
     "music": ["youtube_dl>=2018.1.21"],
     "performance": [
         "earl-etf==2.1.2",
-        "ujson==1.35",
+        "ujson==5.1.0",
         "wsaccel==0.6.3",
     ],
     "sharding": ["gipc==1.3.0"],
@@ -41,7 +41,7 @@ setup(
     setup_requires=["pytest-runner==5.3.1"],
     tests_require=[
         "pytest==6.2.5",
-        "pytest-benchmark==3.1.1",
+        "pytest-benchmark==3.4.1",
         "flake8-tuple==0.4.1",
         "flake8-quotes==1.0.0",
         "flake8-comprehensions==1.4.1",
