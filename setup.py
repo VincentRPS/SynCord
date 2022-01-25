@@ -13,12 +13,12 @@ with open("README.md") as f:
 extras_require = {
     "voice": ["telecom-py==0.0.4"],
     "http": ["flask==0.12.2"],
-    "yaml": ["pyyaml==3.12"],
+    "yaml": ["pyyaml==6.0"],
     "music": ["youtube_dl>=2018.1.21"],
     "performance": [
         "earl-etf==2.1.2",
         "ujson==1.35",
-        "wsaccel==0.6.2",
+        "wsaccel==0.6.3",
     ],
     "sharding": ["gipc==0.6.0"],
     "docs": ["biblio==0.0.4"],
