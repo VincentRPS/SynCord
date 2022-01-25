@@ -12,7 +12,7 @@ with open("README.md") as f:
 
 extras_require = {
     "voice": ["telecom-py==0.0.4"],
-    "http": ["flask==0.12.2"],
+    "http": ["flask==2.0.2"],
     "yaml": ["pyyaml==6.0"],
     "music": ["youtube_dl>=2018.1.21"],
     "performance": [
@@ -45,7 +45,7 @@ setup(
         "flake8-tuple==0.4.1",
         "flake8-quotes==1.0.0",
         "flake8-comprehensions==1.4.1",
-        "flake8-commas==2.0.0",
+        "flake8-commas==2.1.0",
         "flake8-builtins==1.4.1",
     ],
     classifiers=[
