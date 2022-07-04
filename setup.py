@@ -17,7 +17,7 @@ extras_require = {
     "music": ["youtube_dl>=2018.1.21"],
     "performance": [
         "earl-etf==2.1.2",
-        "ujson==1.35",
+        "ujson==5.4.0",
         "wsaccel==0.6.3",
     ],
     "sharding": ["gipc==1.3.0"],
