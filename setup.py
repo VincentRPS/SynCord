@@ -46,7 +46,7 @@ setup(
         "flake8-quotes==1.0.0",
         "flake8-comprehensions==1.4.1",
         "flake8-commas==2.1.0",
-        "flake8-builtins==1.4.1",
+        "flake8-builtins==2.0.0",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
